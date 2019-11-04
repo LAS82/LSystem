@@ -13,5 +13,19 @@ namespace LSystemTest.Collections.Generics
     [TestClass]
     public class SimpleListTest
     {
+        [TestMethod]
+        public void ConstructorWithCapacity()
+        {
+            SimpleList<int> integers = new SimpleList<int>(15);
+            Assert.AreEqual(integers.Capacity, 15);
+            Assert.AreEqual(integers.Count, 0);
+
+            SimpleList<string> strings = new SimpleList<string>(20);
+            Assert.AreEqual(strings.Capacity, 20);
+            Assert.AreEqual(strings.Count, 0);
+
+            Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(0); } );
+            Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(-1); });
+        }
     }
 }

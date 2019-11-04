@@ -52,6 +52,23 @@ namespace LSystem.Collections.Generics
 
         #endregion
 
+        #region Constructors
+
+        /// <summary>
+        /// Constructor that receives the capacity value.
+        /// </summary>
+        /// <param name="capacity">Indicates the max size of the SimpleList.</param>
+        public SimpleList(int capacity)
+        {
+            if (capacity <= 0)
+                throw new ArgumentException("The capacity of a SimpleList must be greater than 0.", "capacity");
+
+            _capacity = capacity;
+            Count = 0;
+        }
+
+        #endregion
+
         public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool IsReadOnly => throw new NotImplementedException();
