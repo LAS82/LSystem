@@ -127,8 +127,6 @@ namespace LSystem.Collections.Generics
 
         /// <summary>
         /// Reallocates the data to a new memory position.
-        /// This just happens when the memory already contains
-        /// items added.
         /// </summary>
         private void ReallocateData()
         {
