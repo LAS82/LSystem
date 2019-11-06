@@ -56,5 +56,17 @@ namespace LSystemTest.Collections.Generics
 
             Assert.ThrowsException<InvalidOperationException>(() => { strings.Add(" could not be added."); });
         }
+
+        [TestMethod]
+        public void PropertyIndex()
+        {
+            SimpleList<decimal> list = new SimpleList<decimal>(5);
+            list.Add(100M);
+
+            Assert.AreEqual(list[0], 100M);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { decimal value = list[-1]; });
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { decimal value = list[1]; });
+        }
     }
 }

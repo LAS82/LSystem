@@ -80,7 +80,26 @@ namespace LSystem.Collections.Generics
 
         #endregion
 
-        public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        /// <summary>
+        /// Return the item's list based on the index
+        /// </summary>
+        /// <param name="index">Index of the list</param>
+        /// <returns>The item based on the index</returns>
+        public T this[int index]
+        {
+            get
+            {
+                if (index < 0 || index > Count - 1)
+                    throw new ArgumentOutOfRangeException("index", "Index was out of range. Must be non-negative and less than the size of the collection.");
+
+                return _items[index];
+            }
+
+            set
+            {
+                _items[index] = value;
+            }
+        }
 
         public bool IsReadOnly => throw new NotImplementedException();
 
