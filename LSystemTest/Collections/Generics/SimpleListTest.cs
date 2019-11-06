@@ -31,6 +31,7 @@ namespace LSystemTest.Collections.Generics
         [TestMethod]
         public void ConstructorWithCapacityAndResizable()
         {
+            //Resizable
             SimpleList<string> strings = new SimpleList<string>(2, true);
             Assert.AreEqual(strings.Capacity, 2);
             Assert.AreEqual(strings.Count, 0);
@@ -44,6 +45,8 @@ namespace LSystemTest.Collections.Generics
             strings.Add(" strings.");
             Assert.AreEqual(strings.Count, 3);
 
+
+            //Not Resizable
             strings = new SimpleList<string>(2, false);
             strings.Add("Trying to ");
             Assert.AreEqual(strings.Count, 1);
@@ -52,16 +55,6 @@ namespace LSystemTest.Collections.Generics
             Assert.AreEqual(strings.Count, 2);
 
             Assert.ThrowsException<InvalidOperationException>(() => { strings.Add(" could not be added."); });
-
-
-            /*
-             SimpleList<string> strings = new SimpleList<string>(20);
-            Assert.AreEqual(strings.Capacity, 20);
-            Assert.AreEqual(strings.Count, 0);
-
-            Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(0); });
-            Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(-1); });
-            */
         }
     }
 }
