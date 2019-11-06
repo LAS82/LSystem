@@ -17,7 +17,7 @@ namespace LSystem.Collections.Generics
         /// <summary>
         /// Indicates whether the list can be resized.
         /// </summary>
-        private bool Resizable
+        public bool Resizable
         {
             get; set;
         }
@@ -65,6 +65,17 @@ namespace LSystem.Collections.Generics
 
             _capacity = capacity;
             Count = 0;
+            _items = new T[Capacity];
+        }
+
+        /// <summary>
+        /// Constructor that receives the capacity and the resizable.
+        /// </summary>
+        /// <param name="capacity">Indicates the max size of the SimpleList.</param>
+        /// <param name="resizable">Indicates if the list could be resized.</param>
+        public SimpleList(int capacity, bool resizable) : this(capacity)
+        {
+            Resizable = resizable;
         }
 
         #endregion
@@ -73,9 +84,19 @@ namespace LSystem.Collections.Generics
 
         public bool IsReadOnly => throw new NotImplementedException();
 
+        /// <summary>
+        /// Add a new item to the list.
+        /// </summary>
+        /// <param name="item">Item to be added.</param>
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            if (!Resizable && Count == Capacity)
+                throw new InvalidOperationException("SimpleList is full. To add more items than the capacity, set Resizable to true.");
+
+            if (Count == Capacity)
+                Capacity = Capacity * 2;
+
+            _items[Count++] = item;
         }
 
         public void Clear()
@@ -126,7 +147,7 @@ namespace LSystem.Collections.Generics
         #region [Private Methods]
 
         /// <summary>
-        /// Reallocates the data to a new memory position.
+        /// Reallocates the data to a new memory location.
         /// </summary>
         private void ReallocateData()
         {

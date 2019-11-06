@@ -27,5 +27,41 @@ namespace LSystemTest.Collections.Generics
             Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(0); } );
             Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(-1); });
         }
+
+        [TestMethod]
+        public void ConstructorWithCapacityAndResizable()
+        {
+            SimpleList<string> strings = new SimpleList<string>(2, true);
+            Assert.AreEqual(strings.Capacity, 2);
+            Assert.AreEqual(strings.Count, 0);
+
+            strings.Add("Trying to ");
+            Assert.AreEqual(strings.Count, 1);
+
+            strings.Add(" add three ");
+            Assert.AreEqual(strings.Count, 2);
+
+            strings.Add(" strings.");
+            Assert.AreEqual(strings.Count, 3);
+
+            strings = new SimpleList<string>(2, false);
+            strings.Add("Trying to ");
+            Assert.AreEqual(strings.Count, 1);
+
+            strings.Add(" add three ");
+            Assert.AreEqual(strings.Count, 2);
+
+            Assert.ThrowsException<InvalidOperationException>(() => { strings.Add(" could not be added."); });
+
+
+            /*
+             SimpleList<string> strings = new SimpleList<string>(20);
+            Assert.AreEqual(strings.Capacity, 20);
+            Assert.AreEqual(strings.Count, 0);
+
+            Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(0); });
+            Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(-1); });
+            */
+        }
     }
 }
