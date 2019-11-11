@@ -90,7 +90,10 @@ namespace LSystem.Collections.Generics
             ICollection<T> itemsCol = items as ICollection<T>;
 
             if (itemsCol != null)
-                Capacity = itemsCol.Count;
+                _capacity = itemsCol.Count;                
+
+            Count = 0;
+            _items = new T[Capacity];
 
             IEnumerator<T> enumerator = items.GetEnumerator();
 

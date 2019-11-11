@@ -54,7 +54,29 @@ namespace LSystemTest.Collections.Generics
             strings.Add(" add three ");
             Assert.AreEqual(strings.Count, 2);
 
-            Assert.ThrowsException<InvalidOperationException>(() => { strings.Add(" could not be added."); });
+            Assert.ThrowsException<InvalidOperationException>(() => strings.Add(" could not be added."));
+        }
+
+        [TestMethod]
+        public void ConstructorWithItems()
+        {
+            IEnumerable<int> items = new List<int>(new int [] { 1, 2, 3, 4 });
+
+            SimpleList<int> integers = new SimpleList<int>(items);
+
+            Assert.AreEqual(integers[1], 2);
+            Assert.AreEqual(integers[2], 3);
+            Assert.AreEqual(integers.Capacity, 4);
+            Assert.AreEqual(integers.Count, 4);
+
+            
+            Assert.ThrowsException<ArgumentNullException>(() => {
+
+                items = null;
+                integers = new SimpleList<int>(items);
+                
+            });
+
         }
 
         [TestMethod]
