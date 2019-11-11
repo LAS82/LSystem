@@ -78,6 +78,26 @@ namespace LSystem.Collections.Generics
             Resizable = resizable;
         }
 
+        /// <summary>
+        /// Initializes the simple list with some items.
+        /// </summary>
+        /// <param name="items">Items to be added to the list.</param>
+        public SimpleList(IEnumerable<T> items)
+        {
+            if (items == null)
+                throw new ArgumentNullException("items", "Items parameter cannot be null.");
+
+            ICollection<T> itemsCol = items as ICollection<T>;
+
+            if (itemsCol != null)
+                Capacity = itemsCol.Count;
+
+            IEnumerator<T> enumerator = items.GetEnumerator();
+
+            while (enumerator.MoveNext())
+                Add(enumerator.Current);
+        }
+
         #endregion
 
         /// <summary>
