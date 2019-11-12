@@ -153,9 +153,18 @@ namespace LSystem.Collections.Generics
             }
         }
 
+        /// <summary>
+        /// Uses the Equals implementation to find the item.
+        /// </summary>
+        /// <param name="item">The item to search.</param>
+        /// <returns>Indicates if the item was found.</returns>
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < Count; ++i)
+                if (_items[i].Equals(item))
+                    return true;
+
+            return false;
         }
 
         /// <summary>
