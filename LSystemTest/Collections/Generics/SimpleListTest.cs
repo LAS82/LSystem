@@ -101,5 +101,33 @@ namespace LSystemTest.Collections.Generics
             Assert.AreEqual(0, dates.Count);
             Assert.AreEqual(2, dates.Capacity);
         }
+
+        [TestMethod]
+        public void CopyTo()
+        {
+            SimpleList<string> strings = new SimpleList<string>(3);
+            strings.Add("Hello ");
+            strings.Add("world!");
+
+            string[] stringsArr = new string[2];
+
+            strings.CopyTo(stringsArr, 0);
+
+            Assert.AreEqual("Hello ", stringsArr[0]);
+            Assert.AreEqual("world!", stringsArr[1]);
+            Assert.AreEqual(stringsArr.Length, strings.Count);
+
+            Assert.ThrowsException<ArgumentNullException>(() => 
+            {
+                strings.CopyTo(null, 0);
+            });
+
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                stringsArr = new string[0];
+                strings.CopyTo(stringsArr, 0);
+            });
+            
+        }
     }
 }

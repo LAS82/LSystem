@@ -148,7 +148,7 @@ namespace LSystem.Collections.Generics
         {
             if (Count > 0)
             {
-                Array.Clear(_items, 0, _items.Length);
+                Array.Clear(_items, 0, Count);
                 Count = 0;
             }
         }
@@ -165,7 +165,7 @@ namespace LSystem.Collections.Generics
         /// <param name="arrayIndex">The given array start index.</param>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            Array.Copy(_items, 0, array, arrayIndex, _items.Length);
+            Array.Copy(_items, 0, array, arrayIndex, Count);
         }
 
         /// <summary>
