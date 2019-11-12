@@ -142,7 +142,7 @@ namespace LSystem.Collections.Generics
         }
 
         /// <summary>
-        /// Clear the array
+        /// Clears the list.
         /// </summary>
         public void Clear()
         {
@@ -158,14 +158,23 @@ namespace LSystem.Collections.Generics
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Copies the list to the given array.
+        /// </summary>
+        /// <param name="array">The given array.</param>
+        /// <param name="arrayIndex">The given array start index.</param>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            Array.Copy(_items, 0, array, arrayIndex, _items.Length);
         }
 
+        /// <summary>
+        /// Returns the list enumerator.
+        /// </summary>
+        /// <returns>The enumerator.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
         }
 
         public int IndexOf(T item)
