@@ -165,5 +165,27 @@ namespace LSystemTest.Collections.Generics
             Assert.AreEqual(Decimal.Zero, decimalEnumerator.Current);
 
         }
+
+        [TestMethod]
+        public void Contains()
+        {
+            SimpleList<StringBuilder> builders = new SimpleList<StringBuilder>(2);
+
+            StringBuilder firstBuilder = new StringBuilder();
+            StringBuilder secondBuilder = new StringBuilder();
+
+            builders.Add(firstBuilder);
+            builders.Add(secondBuilder);
+
+            Assert.AreEqual(true, builders.Contains(firstBuilder));
+            Assert.AreEqual(false, builders.Contains(new StringBuilder()));
+
+            SimpleList<int> numbers = new SimpleList<int>(new int[] { 1, 2, 3 });
+            Assert.AreEqual(true, numbers.Contains(3));
+            Assert.AreEqual(false, numbers.Contains(4));
+
+            SimpleList<string> nulls = new SimpleList<string>(new string[] { null, null, null });
+            Assert.ThrowsException<NullReferenceException>(() => nulls.Contains(null));
+        }
     }
 }
