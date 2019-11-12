@@ -174,7 +174,7 @@ namespace LSystem.Collections.Generics
         /// <returns>The enumerator.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new SimpleEnumerator<T>(this);
         }
 
         public int IndexOf(T item)

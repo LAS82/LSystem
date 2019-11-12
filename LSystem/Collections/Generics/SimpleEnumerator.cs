@@ -47,8 +47,7 @@ namespace LSystem.Collections.Generics
         /// </summary>
         public void Dispose()
         {
-            _simpleList = null;
-            _index = -1;
+            //No need to dispose.
         }
 
         /// <summary>

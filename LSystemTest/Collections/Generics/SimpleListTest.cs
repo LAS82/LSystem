@@ -130,5 +130,40 @@ namespace LSystemTest.Collections.Generics
             });
             
         }
+
+        [TestMethod]
+        public void GetEnumerator()
+        {
+            SimpleList<decimal> decs = new SimpleList<decimal>(10);
+
+            decs.Add(10.00M);
+            decs.Add(11.01M);
+            decs.Add(12.02M);
+            decs.Add(13.03M);
+            decs.Add(14.04M);
+
+            IEnumerator<decimal> decimalEnumerator = decs.GetEnumerator();
+
+            int index = 0;
+            while (decimalEnumerator.MoveNext())
+            {
+                Assert.AreEqual(decs[index], decimalEnumerator.Current);
+                index++;
+            }
+
+            decimalEnumerator.MoveNext();
+            Assert.AreEqual(10.00M, decimalEnumerator.Current);
+
+            decimalEnumerator.MoveNext();
+            Assert.AreEqual(11.01M, decimalEnumerator.Current);
+
+            decimalEnumerator.Reset();
+            decimalEnumerator.MoveNext();
+            Assert.AreEqual(10.00M, decimalEnumerator.Current);
+
+            decimalEnumerator.Reset();
+            Assert.AreEqual(Decimal.Zero, decimalEnumerator.Current);
+
+        }
     }
 }
