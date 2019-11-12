@@ -197,9 +197,13 @@ namespace LSystem.Collections.Generics
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Returns the list enumerator.
+        /// </summary>
+        /// <returns>The enumerator.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
         }
 
         #region [Private Methods]
