@@ -17,12 +17,12 @@ namespace LSystemTest.Collections.Generics
         public void ConstructorWithCapacity()
         {
             SimpleList<int> integers = new SimpleList<int>(15);
-            Assert.AreEqual(integers.Capacity, 15);
-            Assert.AreEqual(integers.Count, 0);
+            Assert.AreEqual(15, integers.Capacity);
+            Assert.AreEqual(0, integers.Count);
 
             SimpleList<string> strings = new SimpleList<string>(20);
-            Assert.AreEqual(strings.Capacity, 20);
-            Assert.AreEqual(strings.Count, 0);
+            Assert.AreEqual(20, strings.Capacity);
+            Assert.AreEqual(0, strings.Count);
 
             Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(0); } );
             Assert.ThrowsException<ArgumentException>(() => { new SimpleList<StringBuilder>(-1); });
@@ -33,26 +33,26 @@ namespace LSystemTest.Collections.Generics
         {
             //Resizable
             SimpleList<string> strings = new SimpleList<string>(2, true);
-            Assert.AreEqual(strings.Capacity, 2);
-            Assert.AreEqual(strings.Count, 0);
+            Assert.AreEqual(2, strings.Capacity);
+            Assert.AreEqual(0, strings.Count);
 
             strings.Add("Trying to ");
-            Assert.AreEqual(strings.Count, 1);
+            Assert.AreEqual(1, strings.Count);
 
             strings.Add(" add three ");
-            Assert.AreEqual(strings.Count, 2);
+            Assert.AreEqual(2, strings.Count);
 
             strings.Add(" strings.");
-            Assert.AreEqual(strings.Count, 3);
+            Assert.AreEqual(3, strings.Count);
 
 
             //Not Resizable
             strings = new SimpleList<string>(2, false);
             strings.Add("Trying to ");
-            Assert.AreEqual(strings.Count, 1);
+            Assert.AreEqual(1, strings.Count);
 
             strings.Add(" add three ");
-            Assert.AreEqual(strings.Count, 2);
+            Assert.AreEqual(2, strings.Count);
 
             Assert.ThrowsException<InvalidOperationException>(() => strings.Add(" could not be added."));
         }
@@ -64,10 +64,10 @@ namespace LSystemTest.Collections.Generics
 
             SimpleList<int> integers = new SimpleList<int>(items);
 
-            Assert.AreEqual(integers[1], 2);
-            Assert.AreEqual(integers[2], 3);
-            Assert.AreEqual(integers.Capacity, 4);
-            Assert.AreEqual(integers.Count, 4);
+            Assert.AreEqual(2, integers[1]);
+            Assert.AreEqual(3, integers[2]);
+            Assert.AreEqual(4, integers.Capacity);
+            Assert.AreEqual(4, integers.Count);
 
             
             Assert.ThrowsException<ArgumentNullException>(() => {
@@ -85,7 +85,7 @@ namespace LSystemTest.Collections.Generics
             SimpleList<decimal> list = new SimpleList<decimal>(5);
             list.Add(100M);
 
-            Assert.AreEqual(list[0], 100M);
+            Assert.AreEqual(100M, list[0]);
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => { decimal value = list[-1]; });
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => { decimal value = list[1]; });
@@ -115,7 +115,8 @@ namespace LSystemTest.Collections.Generics
 
             Assert.AreEqual("Hello ", stringsArr[0]);
             Assert.AreEqual("world!", stringsArr[1]);
-            Assert.AreEqual(stringsArr.Length, strings.Count);
+            Assert.AreEqual(2, strings.Count);
+            Assert.AreEqual(2, stringsArr.Length);
 
             Assert.ThrowsException<ArgumentNullException>(() => 
             {
