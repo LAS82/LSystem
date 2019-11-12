@@ -124,7 +124,10 @@ namespace LSystem.Collections.Generics
             }
         }
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        /// <summary>
+        /// The SimpleList will never be read only.
+        /// </summary>
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// Add a new item to the list.
