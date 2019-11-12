@@ -90,5 +90,16 @@ namespace LSystemTest.Collections.Generics
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => { decimal value = list[-1]; });
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => { decimal value = list[1]; });
         }
+
+        [TestMethod]
+        public void Clear()
+        {
+            SimpleList<DateTime> dates = new SimpleList<DateTime>(new DateTime[] { new DateTime(), DateTime.Now });
+
+            Assert.AreEqual(2, dates.Count);
+            dates.Clear();
+            Assert.AreEqual(0, dates.Count);
+            Assert.AreEqual(2, dates.Capacity);
+        }
     }
 }

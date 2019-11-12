@@ -141,9 +141,16 @@ namespace LSystem.Collections.Generics
             _items[Count++] = item;
         }
 
+        /// <summary>
+        /// Clear the array
+        /// </summary>
         public void Clear()
         {
-            throw new NotImplementedException();
+            if (Count > 0)
+            {
+                Array.Clear(_items, 0, _items.Length);
+                Count = 0;
+            }
         }
 
         public bool Contains(T item)
