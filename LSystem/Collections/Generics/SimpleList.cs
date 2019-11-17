@@ -206,11 +206,11 @@ namespace LSystem.Collections.Generics
         /// <param name="item"></param>
         public void Insert(int index, T item)
         {
-            if(index < 0 || index > Count - 1)
-                throw new IndexOutOfRangeException("Index was out of range. Must be non-negative and less than the size of the collection.");
-
             if (Count == Capacity)
                 Capacity *= 2;
+
+            if (index < 0 || index > Count)
+                throw new ArgumentOutOfRangeException("index", "Index was out of range. Must be non-negative and less than the size of the collection.");
 
             Array.Copy(_items, index, _items, index + 1, Count - index);
             _items[index] = item;

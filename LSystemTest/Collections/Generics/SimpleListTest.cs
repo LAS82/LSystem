@@ -187,5 +187,39 @@ namespace LSystemTest.Collections.Generics
             SimpleList<string> nulls = new SimpleList<string>(new string[] { null, null, null });
             Assert.ThrowsException<NullReferenceException>(() => nulls.Contains(null));
         }
+
+        [TestMethod]
+        public void IndexOf()
+        {
+            SimpleList<string> strings = new SimpleList<string>(3);
+            strings.Add("Hello ");
+            strings.Add("world!");
+
+            Assert.AreEqual(0, strings.IndexOf("Hello "));
+            Assert.AreEqual(1, strings.IndexOf("world!"));
+            Assert.AreEqual(-1, strings.IndexOf(null));
+            Assert.AreEqual(-1, strings.IndexOf("abc"));
+        }
+
+        [TestMethod]
+        public void Insert()
+        {
+            SimpleList<string> strings = new SimpleList<string>(3, true);
+            strings.Add("first");
+            strings.Add("second");
+
+            strings.Insert(2, "fourth");
+            strings.Insert(2, "third");
+
+            strings.Insert(4, "fifth");
+
+            Assert.AreEqual(0, strings.IndexOf("first"));
+            Assert.AreEqual(1, strings.IndexOf("second"));
+            Assert.AreEqual(2, strings.IndexOf("third"));
+            Assert.AreEqual(3, strings.IndexOf("fourth"));
+            Assert.AreEqual(4, strings.IndexOf("fifth"));
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { strings.Insert(6, "sixth"); });
+        }
     }
 }

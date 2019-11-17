@@ -47,7 +47,6 @@ namespace LSystem.Collections.Generics
         /// </summary>
         public void Dispose()
         {
-            //No need to dispose.
         }
 
         /// <summary>
