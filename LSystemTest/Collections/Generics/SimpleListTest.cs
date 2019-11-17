@@ -221,5 +221,111 @@ namespace LSystemTest.Collections.Generics
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => { strings.Insert(6, "sixth"); });
         }
+
+        [TestMethod]
+        public void RemoveAt()
+        {
+            SimpleList<string> strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.RemoveAt(0);
+            Assert.AreEqual("B", strings[0]);
+            Assert.AreEqual("C", strings[1]);
+            Assert.AreEqual("D", strings[2]);
+
+            strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.RemoveAt(1);
+            Assert.AreEqual("A", strings[0]);
+            Assert.AreEqual("C", strings[1]);
+            Assert.AreEqual("D", strings[2]);
+
+            strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.RemoveAt(2);
+            Assert.AreEqual("A", strings[0]);
+            Assert.AreEqual("B", strings[1]);
+            Assert.AreEqual("D", strings[2]);
+
+            strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.RemoveAt(3);
+            Assert.AreEqual("A", strings[0]);
+            Assert.AreEqual("B", strings[1]);
+            Assert.AreEqual("C", strings[2]);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(()=> { strings.RemoveAt(-1); });
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { strings.RemoveAt(10); });
+
+        }
+
+        [TestMethod]
+        public void Remove()
+        {
+            SimpleList<string> strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.Remove("A");
+            Assert.AreEqual("B", strings[0]);
+            Assert.AreEqual("C", strings[1]);
+            Assert.AreEqual("D", strings[2]);
+
+            strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.Remove("B");
+            Assert.AreEqual("A", strings[0]);
+            Assert.AreEqual("C", strings[1]);
+            Assert.AreEqual("D", strings[2]);
+
+            strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.Remove("C");
+            Assert.AreEqual("A", strings[0]);
+            Assert.AreEqual("B", strings[1]);
+            Assert.AreEqual("D", strings[2]);
+
+            strings = new SimpleList<string>(4);
+            strings.Add("A");
+            strings.Add("B");
+            strings.Add("C");
+            strings.Add("D");
+
+            strings.Remove("D");
+            Assert.AreEqual("A", strings[0]);
+            Assert.AreEqual("B", strings[1]);
+            Assert.AreEqual("C", strings[2]);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { strings.Remove("W"); });
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { strings.Remove("Y"); });
+
+        }
     }
 }

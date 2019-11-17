@@ -200,10 +200,10 @@ namespace LSystem.Collections.Generics
         }
 
         /// <summary>
-        /// 
+        /// Insert an T item on the giving index position.
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="item"></param>
+        /// <param name="index">Index.</param>
+        /// <param name="item">Item to be added.</param>
         public void Insert(int index, T item)
         {
             if (Count == Capacity)
@@ -218,22 +218,28 @@ namespace LSystem.Collections.Generics
         }
 
         /// <summary>
-        /// 
+        /// Removes the item from the list.
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <param name="item">Item to be removed.</param>
+        /// <returns>indicate if the operation occurs successfully.</returns>
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            RemoveAt(Array.IndexOf<T>(_items, item));
+            return true;
         }
 
         /// <summary>
-        /// 
+        /// Removes the item at the given index.
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">index of the item to be removed.</param>
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            if (index < 0 || index > Count)
+                throw new ArgumentOutOfRangeException("index", "Index was out of range. Must be non-negative and less than the size of the collection.");
+
+            Array.Copy(_items, index + 1, _items, index, Count - index - 1);            
+            Count--;
+            _items[Count] = default(T);
         }
 
         /// <summary>
