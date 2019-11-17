@@ -139,7 +139,7 @@ namespace LSystem.Collections.Generics
                 throw new InvalidOperationException("SimpleList is full. To add more items than the capacity, set Resizable to true.");
 
             if (Count == Capacity)
-                Capacity = Capacity * 2;
+                Capacity *= 2;
 
             _items[Count++] = item;
         }
@@ -189,21 +189,48 @@ namespace LSystem.Collections.Generics
             return new SimpleEnumerator<T>(this);
         }
 
+        /// <summary>
+        /// Find the index of the first element that matches the item to search.
+        /// </summary>
+        /// <param name="item">Item to search.</param>
+        /// <returns>The index.</returns>
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            return Array.IndexOf<T>(_items, item, 0, Count);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            if(index < 0 || index > Count - 1)
+                throw new IndexOutOfRangeException("Index was out of range. Must be non-negative and less than the size of the collection.");
+
+            if (Count == Capacity)
+                Capacity *= 2;
+
+            Array.Copy(_items, index, _items, index + 1, Count - index);
+            _items[index] = item;
+            Count++;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Remove(T item)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
         public void RemoveAt(int index)
         {
             throw new NotImplementedException();
