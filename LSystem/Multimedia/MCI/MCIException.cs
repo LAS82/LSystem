@@ -20,7 +20,7 @@ namespace LSystem.Multimedia.MCI
         /// <param name="lpszErrorText">The StringBuilder that will receive the error message.</param>
         /// <param name="cchErrorText">The StringBuilder capacity size.</param>
         /// <returns></returns>
-        [DllImport("winmm.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("winmm.dll")]
         private static extern bool mciGetErrorString(int fdwError, StringBuilder lpszErrorText, int cchErrorText);
 
         /// <summary>
