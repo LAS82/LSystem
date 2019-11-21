@@ -5,7 +5,11 @@ using System.Text;
 
 namespace LSystem.Collections.Generics
 {
-    [Serializable]
+    /// <summary>
+    /// A generic list that can be Resizable.
+    /// </summary>
+    /// <typeparam name="T">Any object</typeparam>
+    [Serializable]    
     public sealed class SimpleList<T> : IList<T>
     {
         #region [Properties]

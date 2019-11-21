@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace LSystem.Collections.Generics
 {
+    /// <summary>
+    /// Class used to traverse a list.
+    /// </summary>
+    /// <typeparam name="T">Any object.</typeparam>
     public struct SimpleEnumerator<T> : IEnumerator<T>
     {
 
