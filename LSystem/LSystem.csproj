@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Collections\Generics\SimpleEnumerator.cs" />
     <Compile Include="Collections\Generics\SimpleList.cs" />
+    <Compile Include="Multimedia\MCI\MCIException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
