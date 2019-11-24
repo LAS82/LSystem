@@ -96,7 +96,7 @@ namespace LSystem.Multimedia.MCI
         }
 
         /// <summary>
-        /// Retruns the current play time.
+        /// Returns the current play time.
         /// </summary>
         /// <returns>The current play time</returns>
         internal String RetrieveCurrentTime()
@@ -108,7 +108,19 @@ namespace LSystem.Multimedia.MCI
         }
 
         /// <summary>
-        /// Open have to be implemented because it depends 
+        /// Returns the song length.
+        /// </summary>
+        /// <returns>The total time formmated.</returns>
+        public String RetrieveSongLength()
+        {
+            StringBuilder mciData = new StringBuilder(128);
+            ExecuteMCICommand($"status {MediaName} length", mciData);
+
+            return mciData.ToString();
+        }
+
+        /// <summary>
+        /// The open method must be implemented because it depends 
         /// of the media type.
         /// </summary>
         internal abstract void Open();
