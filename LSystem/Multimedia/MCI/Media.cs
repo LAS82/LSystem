@@ -10,9 +10,12 @@ namespace LSystem.Multimedia.MCI
     /// <summary>
     /// An abstract class that serves as a base class to concrete media classes.
     /// </summary>
-    public abstract class Media
+    public abstract class Media : IDisposable
     {
 
+        /// <summary>
+        /// A reference name for the media.
+        /// </summary>
         internal string MediaName { get; set; }
 
         /// <summary>
@@ -74,12 +77,20 @@ namespace LSystem.Multimedia.MCI
         /// <summary>
         /// Closes the media.
         /// </summary>
-        private void CloseAudioFile()
+        internal void Close()
         {
-            String command = $"close {MediaName}";
-            mciSendString(command, null, 0, IntPtr.Zero);
+            ExecuteMCICommand($"close {MediaName}");
         }
 
+
+
+        /// <summary>
+        /// Open have to be implemented because it depends 
+        /// of the media type.
+        /// </summary>
         internal abstract void Open();
+
+
+        public abstract void Dispose();
     }
 }
