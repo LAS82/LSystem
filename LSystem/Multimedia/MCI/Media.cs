@@ -13,6 +13,10 @@ namespace LSystem.Multimedia.MCI
     public abstract class Media
     {
 
+        internal string MediaName { get; set; }
+
+        internal PlayStatus CurrentPlayStatus { get; set; }
+
         /// <summary>
         /// Sends a specified command to the MCI Device.
         /// </summary>
@@ -24,5 +28,17 @@ namespace LSystem.Multimedia.MCI
         [DllImport("winmm.dll", SetLastError = true, CallingConvention = CallingConvention.StdCall)]
         private static extern int mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr oCallback);
 
+        /// <summary>
+        /// Executes the specified command.
+        /// </summary>
+        /// <param name="command">The command to be executed in the format 'command {0} command' where {0} will be replaced by the MediaName property.</param>
+        /// <exception cref="MCIException">Throws this exception if any problem occurs during the mciSendString execution.</exception>
+        internal void ExecuteMCICommand(string command)
+        {
+            int errorCode = mciSendString(String.Format(command, this.MediaName), null, 0, IntPtr.Zero);
+
+            if (errorCode != 0)
+                throw new MCIException(errorCode);
+        }
     }
 }
