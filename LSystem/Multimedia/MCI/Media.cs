@@ -34,9 +34,20 @@ namespace LSystem.Multimedia.MCI
         /// </summary>
         /// <param name="command">The command to be executed in the format 'command {0} command' where {0} will be replaced by the MediaName property.</param>
         /// <exception cref="MCIException">Throws this exception if any problem occurs during the mciSendString execution.</exception>
-        internal void ExecuteMCICommand(string command)
+        private void ExecuteMCICommand(string command)
         {
-            int errorCode = mciSendString(String.Format(command, this.MediaName), null, 0, IntPtr.Zero);
+            ExecuteMCICommand(command, null);
+        }
+
+        /// <summary>
+        /// Executes the specified command.
+        /// </summary>
+        /// <param name="command">The command to be executed in the format 'command {0} command' where {0} will be replaced by the MediaName property.</param>
+        /// <exception cref="MCIException">Throws this exception if any problem occurs during the mciSendString execution.</exception>
+        private void ExecuteMCICommand(string command, StringBuilder mciData)
+        {
+            int returnLength = mciData == null ? 0 : mciData.Capacity;
+            int errorCode = mciSendString(String.Format(command, this.MediaName), mciData, returnLength, IntPtr.Zero);
 
             if (errorCode != 0)
                 throw new MCIException(errorCode);
@@ -45,9 +56,11 @@ namespace LSystem.Multimedia.MCI
         /// <summary>
         /// Starts the media execution.
         /// </summary>
-        internal void Play()
+        internal void Play(bool repeat)
         {
-            ExecuteMCICommand($"play {MediaName}");
+            string repeatCommand = repeat ? "REPEAT" : String.Empty;
+
+            ExecuteMCICommand($"play {MediaName} {repeatCommand}");
         }
 
         /// <summary>
@@ -82,7 +95,17 @@ namespace LSystem.Multimedia.MCI
             ExecuteMCICommand($"close {MediaName}");
         }
 
+        /// <summary>
+        /// Retruns the current play time.
+        /// </summary>
+        /// <returns>The current play time</returns>
+        internal String RetrieveCurrentTime()
+        {
+            StringBuilder mciData = new StringBuilder(128);
+            ExecuteMCICommand($"status {MediaName} position", mciData);
 
+            return mciData.ToString();
+        }
 
         /// <summary>
         /// Open have to be implemented because it depends 
