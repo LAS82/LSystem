@@ -15,8 +15,6 @@ namespace LSystem.Multimedia.MCI
 
         internal string MediaName { get; set; }
 
-        internal PlayStatus CurrentPlayStatus { get; set; }
-
         /// <summary>
         /// Sends a specified command to the MCI Device.
         /// </summary>
@@ -42,11 +40,44 @@ namespace LSystem.Multimedia.MCI
         }
 
         /// <summary>
+        /// Starts the media execution.
+        /// </summary>
+        internal void Play()
+        {
+            ExecuteMCICommand($"play {MediaName}");
+        }
+
+        /// <summary>
+        /// Pauses the media execution
+        /// </summary>
+        internal void Pause()
+        {
+            ExecuteMCICommand($"pause {MediaName}");
+        }
+
+        /// <summary>
+        /// Resumes the media execution
+        /// </summary>
+        internal void Resume()
+        {
+            ExecuteMCICommand($"resume {MediaName}");
+        }
+
+        /// <summary>
         /// Stops the media execution.
         /// </summary>
         internal void Stop()
         {
             ExecuteMCICommand($"stop {MediaName}");
+        }
+
+        /// <summary>
+        /// Closes the media.
+        /// </summary>
+        private void CloseAudioFile()
+        {
+            String command = $"close {MediaName}";
+            mciSendString(command, null, 0, IntPtr.Zero);
         }
 
         internal abstract void Open();
