@@ -40,5 +40,15 @@ namespace LSystem.Multimedia.MCI
             if (errorCode != 0)
                 throw new MCIException(errorCode);
         }
+
+        /// <summary>
+        /// Stops the media execution.
+        /// </summary>
+        internal void Stop()
+        {
+            ExecuteMCICommand($"stop {MediaName}");
+        }
+
+        internal abstract void Open();
     }
 }
