@@ -61,50 +61,65 @@ namespace LSystem.Multimedia.MCI
         /// <summary>
         /// Starts the media execution.
         /// </summary>
-        internal void Play(bool repeat)
+        public void Play(bool repeat)
         {
             string repeatCommand = repeat ? "REPEAT" : String.Empty;
 
             ExecuteMCICommand($"play {MediaName} {repeatCommand}");
+
+            MediaStatus = PlayStatus.Playing;
         }
 
         /// <summary>
         /// Pauses the media execution
         /// </summary>
-        internal void Pause()
+        public void Pause()
         {
             ExecuteMCICommand($"pause {MediaName}");
+            MediaStatus = PlayStatus.Paused;
         }
 
         /// <summary>
         /// Resumes the media execution
         /// </summary>
-        internal void Resume()
+        public void Resume()
         {
             ExecuteMCICommand($"resume {MediaName}");
+            MediaStatus = PlayStatus.Playing;
         }
 
         /// <summary>
         /// Stops the media execution.
         /// </summary>
-        internal void Stop()
+        public void Stop()
         {
             ExecuteMCICommand($"stop {MediaName}");
+            MediaStatus = PlayStatus.Stopped;
         }
 
         /// <summary>
         /// Closes the media.
         /// </summary>
-        internal void Close()
+        public void Close()
         {
             ExecuteMCICommand($"close {MediaName}");
+            MediaStatus = PlayStatus.Closed;
+        }
+
+        /// <summary>
+        /// Closes the media if the media isn't close.
+        /// </summary>
+        internal void TryClose()
+        {
+            if (MediaStatus != PlayStatus.Closed)
+                Close();
         }
 
         /// <summary>
         /// Returns the current play time.
         /// </summary>
         /// <returns>The current play time</returns>
-        internal String RetrieveCurrentTime()
+        public String RetrieveCurrentTime()
         {
             StringBuilder mciData = new StringBuilder(128);
             ExecuteMCICommand($"status {MediaName} position", mciData);
