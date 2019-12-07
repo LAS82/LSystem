@@ -3,7 +3,7 @@
     /// <summary>
     /// Indicates wether the media file is in execution or paused or stopped.
     /// </summary>
-    internal enum PlayStatus
+    public enum PlayStatus
     {
         Closed = 0,
         Opened = 1,
