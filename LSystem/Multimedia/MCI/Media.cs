@@ -19,6 +19,11 @@ namespace LSystem.Multimedia.MCI
         internal string MediaName { get; set; }
 
         /// <summary>
+        /// The current media file status.
+        /// </summary>
+        internal PlayStatus MediaStatus { get; set; }
+
+        /// <summary>
         /// Sends a specified command to the MCI Device.
         /// </summary>
         /// <param name="strCommand">Command</param>

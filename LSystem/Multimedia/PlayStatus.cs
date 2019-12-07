@@ -5,8 +5,10 @@
     /// </summary>
     internal enum PlayStatus
     {
-        Stopped = 0,
-        Playing = 1,
-        Paused = 2
+        Closed = 0,
+        Opened = 1,
+        Stopped = 2,
+        Playing = 3,
+        Paused = 4
     }
 }
