@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LSystem.Multimedia.MCI
@@ -10,7 +11,7 @@ namespace LSystem.Multimedia.MCI
     /// <summary>
     /// An abstract class that serves as a base class to concrete media classes.
     /// </summary>
-    public abstract class Media : IDisposable
+    public abstract class Media
     {
 
         /// <summary>
@@ -21,7 +22,23 @@ namespace LSystem.Multimedia.MCI
         /// <summary>
         /// The current media file status.
         /// </summary>
-        public PlayStatus MediaStatus { get; internal set; }
+        public PlayStatus MediaStatus {
+            get
+            {
+                StringBuilder data = new StringBuilder(128);
+                ExecuteMCICommand($"status {MediaName} mode", data);
+
+                switch (data.ToString())
+                {
+                    case MCIPlayStatus.PLAYING:
+                        return PlayStatus.Playing;
+                    case MCIPlayStatus.PAUSED:
+                        return PlayStatus.Paused;
+                    default:
+                        return PlayStatus.Stopped;
+                }
+            }
+        }
 
         /// <summary>
         /// Sends a specified command to the MCI Device.
@@ -52,7 +69,7 @@ namespace LSystem.Multimedia.MCI
         private protected void ExecuteMCICommand(string command, StringBuilder mciData)
         {
             int returnLength = mciData == null ? 0 : mciData.Capacity;
-            int errorCode = mciSendString(String.Format(command, this.MediaName), mciData, returnLength, IntPtr.Zero);
+            int errorCode = mciSendString(command, mciData, returnLength, IntPtr.Zero);
 
             if (errorCode != 0)
                 throw new MCIException(errorCode);
@@ -65,9 +82,7 @@ namespace LSystem.Multimedia.MCI
         {
             string repeatCommand = repeat ? "REPEAT" : String.Empty;
 
-            ExecuteMCICommand($"play {MediaName} {repeatCommand}");
-
-            MediaStatus = PlayStatus.Playing;
+            ExecuteMCICommand($"play {MediaName} {repeatCommand}");  
         }
 
         /// <summary>
@@ -76,7 +91,6 @@ namespace LSystem.Multimedia.MCI
         public void Pause()
         {
             ExecuteMCICommand($"pause {MediaName}");
-            MediaStatus = PlayStatus.Paused;
         }
 
         /// <summary>
@@ -85,7 +99,6 @@ namespace LSystem.Multimedia.MCI
         public void Resume()
         {
             ExecuteMCICommand($"resume {MediaName}");
-            MediaStatus = PlayStatus.Playing;
         }
 
         /// <summary>
@@ -94,7 +107,6 @@ namespace LSystem.Multimedia.MCI
         public void Stop()
         {
             ExecuteMCICommand($"stop {MediaName}");
-            MediaStatus = PlayStatus.Stopped;
         }
 
         /// <summary>
@@ -103,22 +115,12 @@ namespace LSystem.Multimedia.MCI
         public void Close()
         {
             ExecuteMCICommand($"close {MediaName}");
-            MediaStatus = PlayStatus.Closed;
-        }
-
-        /// <summary>
-        /// Closes the media if the media isn't close.
-        /// </summary>
-        internal void TryClose()
-        {
-            if (MediaStatus != PlayStatus.Closed)
-                Close();
         }
 
         /// <summary>
         /// Returns the current play time.
         /// </summary>
-        /// <returns>The current play time</returns>
+        /// <returns>The current play time.</returns>
         public String RetrieveCurrentTime()
         {
             StringBuilder mciData = new StringBuilder(128);
@@ -130,7 +132,7 @@ namespace LSystem.Multimedia.MCI
         /// <summary>
         /// Returns the song length.
         /// </summary>
-        /// <returns>The total time formmated.</returns>
+        /// <returns>The total play time.</returns>
         public String RetrieveSongLength()
         {
             StringBuilder mciData = new StringBuilder(128);
@@ -145,8 +147,5 @@ namespace LSystem.Multimedia.MCI
         /// </summary>
         /// <param name="filePath">The file's full path.</param>
         internal abstract void Open(string filePath);
-
-
-        public abstract void Dispose();
     }
 }

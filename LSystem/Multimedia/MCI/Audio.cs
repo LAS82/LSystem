@@ -16,18 +16,7 @@ namespace LSystem.Multimedia.MCI
         public Audio(string mediaName, string filePath)
         {
             base.MediaName = mediaName;
-            base.MediaStatus = PlayStatus.Closed;
-
             Open(filePath);
-        }
-
-        /// <summary>
-        /// Cleans up.
-        /// </summary>
-        public override void Dispose()
-        {
-            base.TryClose();
-            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -39,16 +28,6 @@ namespace LSystem.Multimedia.MCI
             String command = String.Concat("Open \"", filePath, "\" alias ", base.MediaName);
 
             base.ExecuteMCICommand(command);
-
-            base.MediaStatus = PlayStatus.Opened;
-        }
-
-        /// <summary>
-        /// Finalize method. Called internally by the GC.
-        /// </summary>
-        ~Audio()
-        {
-            Dispose();
         }
     }
 }

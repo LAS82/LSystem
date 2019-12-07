@@ -5,10 +5,18 @@
     /// </summary>
     public enum PlayStatus
     {
-        Closed = 0,
-        Opened = 1,
-        Stopped = 2,
-        Playing = 3,
-        Paused = 4
+        Stopped = 0,
+        Playing = 1,
+        Paused = 2
+    }
+
+    /// <summary>
+    /// Contains the original representations of the MCI's media status.
+    /// </summary>
+    internal static class MCIPlayStatus
+    {
+        internal const string STOPPED = "stopped";
+        internal const string PLAYING = "playing";
+        internal const string PAUSED = "paused";
     }
 }

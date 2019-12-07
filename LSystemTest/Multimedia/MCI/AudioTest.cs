@@ -15,15 +15,16 @@ namespace LSystemTest.Multimedia.MCI
         [TestMethod]
         public void Play()
         {
+
             //Open file.
-            Audio audio = new Audio("Song", @"E:\HDD_General\Músicas\Baba Cósmica - Gororoba\09 - Uma Pedra No Meu Caminho.mp3");
-            Assert.AreEqual(PlayStatus.Opened, audio.MediaStatus);
+            Audio audio = new Audio("MediaFile", @"E:\HDD_General\Músicas\Baba Cósmica - Gororoba\09 - Uma Pedra No Meu Caminho.mp3");
+            Assert.AreEqual(PlayStatus.Stopped, audio.MediaStatus);
 
             //Play file.
             audio.Play(false);
             Assert.AreEqual(PlayStatus.Playing, audio.MediaStatus);
 
-            System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(5000);
 
             //Pause file.
             audio.Pause();
@@ -35,11 +36,10 @@ namespace LSystemTest.Multimedia.MCI
             audio.Resume();
             Assert.AreEqual(PlayStatus.Playing, audio.MediaStatus);
 
-            System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(5000);
 
             //Close file.
             audio.Close();
-            Assert.AreEqual(PlayStatus.Closed, audio.MediaStatus);
         }
     }
 }
