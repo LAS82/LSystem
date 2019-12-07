@@ -34,7 +34,7 @@ namespace LSystem.Multimedia.MCI
         /// </summary>
         /// <param name="command">The command to be executed in the format 'command {0} command' where {0} will be replaced by the MediaName property.</param>
         /// <exception cref="MCIException">Throws this exception if any problem occurs during the mciSendString execution.</exception>
-        private void ExecuteMCICommand(string command)
+        private protected void ExecuteMCICommand(string command)
         {
             ExecuteMCICommand(command, null);
         }
@@ -44,7 +44,7 @@ namespace LSystem.Multimedia.MCI
         /// </summary>
         /// <param name="command">The command to be executed in the format 'command {0} command' where {0} will be replaced by the MediaName property.</param>
         /// <exception cref="MCIException">Throws this exception if any problem occurs during the mciSendString execution.</exception>
-        private void ExecuteMCICommand(string command, StringBuilder mciData)
+        private protected void ExecuteMCICommand(string command, StringBuilder mciData)
         {
             int returnLength = mciData == null ? 0 : mciData.Capacity;
             int errorCode = mciSendString(String.Format(command, this.MediaName), mciData, returnLength, IntPtr.Zero);
@@ -123,7 +123,8 @@ namespace LSystem.Multimedia.MCI
         /// The open method must be implemented because it depends 
         /// of the media type.
         /// </summary>
-        internal abstract void Open();
+        /// <param name="filePath">The file's full path.</param>
+        internal abstract void Open(string filePath);
 
 
         public abstract void Dispose();
