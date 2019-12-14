@@ -15,7 +15,7 @@ namespace LSystemTest.Multimedia.MCI
         [TestMethod]
         public void Play()
         {
-
+#warning REPLACE THE AUDIO_FILE_PATH LITERAL WITH A VALID FILE PATH
             //Open file.
             Audio audio = new Audio("MediaFile", @"AUDIO_FILE_PATH");
             Assert.AreEqual(PlayStatus.Stopped, audio.MediaStatus);
