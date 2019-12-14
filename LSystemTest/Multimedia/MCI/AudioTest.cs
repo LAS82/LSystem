@@ -17,7 +17,7 @@ namespace LSystemTest.Multimedia.MCI
         {
 
             //Open file.
-            Audio audio = new Audio("MediaFile", @"E:\HDD_General\Músicas\Baba Cósmica - Gororoba\09 - Uma Pedra No Meu Caminho.mp3");
+            Audio audio = new Audio("MediaFile", @"AUDIO_FILE_PATH");
             Assert.AreEqual(PlayStatus.Stopped, audio.MediaStatus);
 
             //Play file.
