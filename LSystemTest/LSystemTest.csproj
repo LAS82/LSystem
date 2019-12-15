@@ -52,6 +52,7 @@
     <Compile Include="Collections\Generics\SimpleListTest.cs" />
     <Compile Include="Multimedia\MCI\MCIExceptionTest.cs" />
     <Compile Include="Multimedia\MCI\AudioTest.cs" />
+    <Compile Include="Multimedia\MCI\VideoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
