@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Generics\SimpleListTest.cs" />
+    <Compile Include="Drawing\SizeTest.cs" />
     <Compile Include="Multimedia\MCI\MCIExceptionTest.cs" />
     <Compile Include="Multimedia\MCI\AudioTest.cs" />
     <Compile Include="Multimedia\MCI\VideoTest.cs" />
