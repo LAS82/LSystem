@@ -40,9 +40,9 @@ namespace LSystem.Multimedia.MCI
         }
 
         /// <summary>
-        /// 
+        /// Opens the video file.
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="filePath">the video file's path</param>
         internal override void Open(string filePath)
         {
             String command = String.Concat("open \"", filePath, "\" type mpegvideo alias MediaFile");
@@ -58,7 +58,7 @@ namespace LSystem.Multimedia.MCI
         }
 
         /// <summary>
-        /// 
+        /// Set tyhe width and height of the window.
         /// </summary>
         private void Put()
         {
