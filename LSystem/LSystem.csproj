@@ -46,6 +46,7 @@
     <Compile Include="Multimedia\MCI\MCIException.cs" />
     <Compile Include="Multimedia\MCI\Media.cs" />
     <Compile Include="Multimedia\MCI\Audio.cs" />
+    <Compile Include="Multimedia\MCI\Video.cs" />
     <Compile Include="Multimedia\PlayStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
