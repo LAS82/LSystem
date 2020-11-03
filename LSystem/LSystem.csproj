@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Collections\Generics\SimpleEnumerator.cs" />
     <Compile Include="Collections\Generics\SimpleList.cs" />
+    <Compile Include="Collections\Generics\SimpleStack.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Multimedia\MCI\MCIException.cs" />
     <Compile Include="Multimedia\MCI\Media.cs" />

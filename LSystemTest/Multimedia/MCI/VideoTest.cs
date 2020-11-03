@@ -15,7 +15,8 @@ namespace LSystemTest.Multimedia.MCI
         [TestMethod]
         public void Play()
         {
-            Video video = new Video("MediaFile", @"E:\HDD_General\Videos\Clipes e Shows\GoGo's - Head Over Heels.mpg");
+#warning REPLACE THE VIDEO_FILE_PATH LITERAL WITH A VALID FILE PATH
+            Video video = new Video("MediaFile", @"VIDEO_FILE_PATH");
 
             Assert.AreEqual(PlayStatus.Stopped, video.MediaStatus);
 
