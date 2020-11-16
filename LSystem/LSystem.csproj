@@ -51,6 +51,7 @@
     <Compile Include="Multimedia\MCI\Video.cs" />
     <Compile Include="Multimedia\PlayStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Email.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

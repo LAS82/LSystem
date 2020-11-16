@@ -56,6 +56,7 @@
     <Compile Include="Multimedia\MCI\AudioTest.cs" />
     <Compile Include="Multimedia\MCI\VideoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\EmailTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
