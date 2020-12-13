@@ -69,6 +69,10 @@ namespace LSystem.Collections.Generics.ThreadSafe
             }
         }
 
+        /// <summary>
+        /// Adds a set of items in the container
+        /// </summary>
+        /// <param name="item">A list of items</param>
         public void Enqueue(IEnumerable<T> items)
         {
             lock (makeItAtomic)
