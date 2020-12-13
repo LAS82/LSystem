@@ -52,6 +52,7 @@
     <Compile Include="Collections\Generics\SimpleListTest.cs" />
     <Compile Include="Collections\Generics\SimpleQueueTest.cs" />
     <Compile Include="Collections\Generics\SimpleStackTest.cs" />
+    <Compile Include="Collections\Generics\ThreadSafe\ThreadSafeQueueTest.cs" />
     <Compile Include="Drawing\SizeTest.cs" />
     <Compile Include="Multimedia\MCI\MCIExceptionTest.cs" />
     <Compile Include="Multimedia\MCI\AudioTest.cs" />
