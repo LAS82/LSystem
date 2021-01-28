@@ -47,6 +47,10 @@
     <Compile Include="Collections\Generics\SimpleStack.cs" />
     <Compile Include="Collections\Generics\ThreadSafe\ThreadSafeQueue.cs" />
     <Compile Include="Collections\Generics\ThreadSafe\ThreadSafeStack.cs" />
+    <Compile Include="Data\Mapper\EntitiesMap.cs" />
+    <Compile Include="Data\Mapper\IMapper.cs" />
+    <Compile Include="Data\Mapper\Mapper.cs" />
+    <Compile Include="Data\Mapper\PropertyMap.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Multimedia\MCI\MCIException.cs" />
     <Compile Include="Multimedia\MCI\Media.cs" />

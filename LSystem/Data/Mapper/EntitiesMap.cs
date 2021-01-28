@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace LSystem.Data.Mapper
 {
     /// <summary>
-    /// List of entities related with a given entity
+    /// List of related properties with a given entity
     /// </summary>
     internal sealed class EntitiesMap
     {
