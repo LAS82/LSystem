@@ -78,7 +78,9 @@ namespace LSystemTest.Data.Mapper
                 .CreateMap(typeof(AddressModel), typeof(AddressEntity))
                 .CreateMap(typeof(AddressEntity), typeof(AddressModel))
                 .CreateMap(typeof(CityModel), typeof(CityEntity))
-                .CreateMap(typeof(CityEntity), typeof(CityModel));
+                .CreateMap(typeof(CityEntity), typeof(CityModel))
+                .CreateMap(typeof(PhoneModel), typeof(PhoneEntity))
+                .CreateMap(typeof(PhoneEntity), typeof(PhoneModel));
         }
 
         private async Task CreateMapsAsync()

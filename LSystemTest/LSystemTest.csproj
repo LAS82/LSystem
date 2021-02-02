@@ -60,9 +60,11 @@
     <Compile Include="Data\Mapper\Data\Entity\AddressEntity.cs" />
     <Compile Include="Data\Mapper\Data\Entity\CityEntity.cs" />
     <Compile Include="Data\Mapper\Data\Entity\ClientEntity.cs" />
+    <Compile Include="Data\Mapper\Data\Entity\PhoneEntity.cs" />
     <Compile Include="Data\Mapper\Data\Model\AddressModel.cs" />
     <Compile Include="Data\Mapper\Data\Model\CityModel.cs" />
     <Compile Include="Data\Mapper\Data\Model\ClientModel.cs" />
+    <Compile Include="Data\Mapper\Data\Model\PhoneModel.cs" />
     <Compile Include="Data\Mapper\MapperTest.cs" />
     <Compile Include="Drawing\SizeTest.cs" />
     <Compile Include="Multimedia\MCI\MCIExceptionTest.cs" />

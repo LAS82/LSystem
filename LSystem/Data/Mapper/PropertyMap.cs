@@ -45,7 +45,9 @@ namespace LSystem.Data.Mapper
         {
             Type sourcePropertyType = source.GetType().GetProperty(Source).GetValue(source).GetType();
 
-            if (sourcePropertyType.IsValueType || sourcePropertyType == typeof(string))
+            if(sourcePropertyType.GetInterfaces().FirstOrDefault(i => i.Name == "IEnumerable") != null && sourcePropertyType != typeof(string))
+                this.SetValuesForCollectionType(source, destination, mapper);
+            else if (sourcePropertyType.IsValueType || sourcePropertyType == typeof(string))
                 this.SetValueForValueType(source, destination);
             else
                 this.SetValueForReferenceType(source, destination, mapper);
@@ -84,6 +86,60 @@ namespace LSystem.Data.Mapper
         }
 
         /// <summary>
+        /// Sets collection values
+        /// </summary>
+        /// <typeparam name="TSource">Source type</typeparam>
+        /// <typeparam name="TDestination">Destination type</typeparam>
+        /// <param name="source">Source object</param>
+        /// <param name="destination">Destination object</param>
+        /// <param name="mapper">Mapper used to call the map method to find and set reference type data</param>
+        private void SetValuesForCollectionType<TSource, TDestination>(TSource source, TDestination destination, IMapper mapper)
+        {
+
+            PropertyInfo destinationProperty = destination.GetType().GetProperty(Destination);
+
+            Type destinationType = destination.GetType().GetProperty(Destination).PropertyType;
+
+            if (destinationType.IsArray)
+            {
+                return;
+            }
+            else if (destinationType.GetInterfaces().FirstOrDefault(x => x.Name == "IDictionary") != null)
+            {
+            }
+            else if (destinationType.GetInterfaces().FirstOrDefault(x => x.Name == "IList") != null)
+            {
+
+                if (destinationType.GenericTypeArguments.FirstOrDefault().IsValueType || destinationType.GenericTypeArguments.FirstOrDefault() == typeof(string))
+                {
+                    var destinationListInstance = Activator.CreateInstance(destinationType) as System.Collections.IList;
+
+                    System.Collections.IList sourceList = source.GetType().GetProperty(Source).GetValue(source) as System.Collections.IList;
+
+                    foreach (var sourceItem in sourceList)
+                        destinationListInstance.Add(sourceItem);
+
+                    destination.GetType().GetProperty(Destination).SetValue(destination, destinationListInstance);
+                }
+                else if (!destinationType.GenericTypeArguments.FirstOrDefault().IsValueType)
+                {
+                    var destinationListInstance = Activator.CreateInstance(destinationType) as System.Collections.IList;
+
+                    System.Collections.IList sourceList = source.GetType().GetProperty(Source).GetValue(source) as System.Collections.IList;
+
+                    foreach (var sourceItem in sourceList)
+                    {
+                        var destinationInstance = ExecMapMethod(mapper, destinationListInstance.GetType().GenericTypeArguments.FirstOrDefault(), sourceItem);
+                        destinationListInstance.Add(destinationInstance);
+                    }
+
+                    destination.GetType().GetProperty(Destination).SetValue(destination, destinationListInstance);
+                }
+            }
+
+        }
+
+        /// <summary>
         /// Executes the map method
         /// </summary>
         /// <param name="mapper">Mapper that contains the map method</param>
@@ -92,11 +148,23 @@ namespace LSystem.Data.Mapper
         /// <returns>The object filled</returns>
         private object ExecMapMethod(IMapper mapper, PropertyInfo destinationProperty, object sourceValue)
         {
+            Type destinationPropertyType = destinationProperty.PropertyType;
+            return ExecMapMethod(mapper, destinationPropertyType, sourceValue);
+        }
+
+        /// <summary>
+        /// Executes the map method
+        /// </summary>
+        /// <param name="mapper">Mapper that contains the map method</param>
+        /// <param name="destinationType">Destination type</param>
+        /// <param name="sourceValue">Source value</param>
+        /// <returns>The object filled</returns>
+        private object ExecMapMethod(IMapper mapper, Type destinationType, object sourceValue)
+        {
             Type mapperType = mapper.GetType();
             Type sourceType = sourceValue.GetType();
-            Type destinationPropertyType = destinationProperty.PropertyType;
 
-            MethodInfo mapMethod = mapperType.GetMethod("Map").MakeGenericMethod(new Type[] { sourceType, destinationPropertyType });
+            MethodInfo mapMethod = mapperType.GetMethod("Map").MakeGenericMethod(new Type[] { sourceType, destinationType });
 
             return mapMethod.Invoke(mapper, new object[] { sourceValue });
         }
